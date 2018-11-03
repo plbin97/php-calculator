@@ -1,0 +1,23 @@
+{
+  "name": "php-calculator",
+  "version": "1.0.0",
+  "description": "Online Calculator for PHP, my class assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plbin97/php-calculator.git"
+  },
+  "keywords": [
+    "calculator",
+    "php"
+  ],
+  "author": "Linbin Pang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plbin97/php-calculator/issues"
+  },
+  "homepage": "https://github.com/plbin97/php-calculator#readme"
+}
