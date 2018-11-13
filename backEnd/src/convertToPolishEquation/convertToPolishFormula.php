@@ -26,17 +26,50 @@ function convertToPolishFormula($normalFormula) {
             array_push($polishFormula,$i);
 
         }else if ($i == '(') {
-            array_push($polishFormula, $i);
-        }else if($i == ')'){
+            // If opening parenthesis, push into stack
+            $operatorStack->push($i);
 
+        }else if($i == ')'){
+            // if closing parenthesis, pop all the operator until an opening parenthesis
+            while($operatorStack->whatsLast() != '(') {
+                array_push($polishFormula,$operatorStack->pop());
+            }
+
+            $operatorStack->pop();  // Pop out the '('
         }else{
+
+            // For operator
+
             if ($operatorStack->isEmpty()) {
+                // If the stack is empty, push into stack
+                $operatorStack->push($i);
+
+            }else if(!$operatorStack->isNextPopHasHigherOrEqualPriorityThan($i)){
                 $operatorStack->push($i);
             }else{
-                if ($operatorStack->)
+                while ($operatorStack->isNextPopHasHigherOrEqualPriorityThan($i)) {
+                    // pop out all the operators with higher or equal priority than $i
+                    if($operatorStack->whatsLast() == '(') {
+                        // If there is an opening parenthesis, then break
+                        $operatorStack->pop();
+                        break;
+                    }
+                    if($operatorStack->isEmpty()) {
+                        // If the stack is empty, then break
+                        break;
+                    }
+                    array_push($polishFormula,$operatorStack->pop());
+                }
+                $operatorStack->push($i);
             }
         }
     }
+    while (!$operatorStack->isEmpty()) {
+        // Pop out the rest of operators in stack
+        array_push($polishFormula,$operatorStack->pop());
+    }
+
+    return $polishFormula;
 
 
 }

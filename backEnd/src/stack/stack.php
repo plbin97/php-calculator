@@ -18,13 +18,15 @@ class OperatorStack
         $this->operatorList['-'] = 1;  // For subtraction
         $this->operatorList['*'] = 2;  // For multiplication
         $this->operatorList['/'] = 2;  // For division
-        $this->operatorList['%'] = 2;  // For modulo
-        $this->operatorList['^'] = 3;  // For exponentiation
-        $this->operatorList['&'] = 3;  // For root
+        $this->operatorList['%'] = 3;  // For modulo
+        $this->operatorList['^'] = 4;  // For exponentiation
+        $this->operatorList['&'] = 4;  // For root
 
         // Bracket is the special operators. The priority is meaningless.
-        $this->operatorList['('] = 4;
-        $this->operatorList[')'] = 4;
+        $this->operatorList['('] = 5;
+        $this->operatorList[')'] = 5;
+
+        print_r($this->operatorList);
     }
 
     function isOperator($operator) {
@@ -65,19 +67,24 @@ class OperatorStack
             return null;
         }
     }
-    function isNextPopHasLowerPriorityThan($operator) {
+    function isNextPopHasHigherOrEqualPriorityThan($operator) {
         /**
          * as function name said
          * @param $operator Operator
          * @return true if yes, return false is not.
-         * ALso, return false if the parameter is not a operator or empty
+         * ALso, return false if the parameter is not a operator or the stack is empty empty or next operator is (
          */
-        if ($this->isOperator($operator)) {
-            return false;
-        }
         if ($this->isEmpty()) {
             return false;
         }
-        return $this->operatorList[$operator] > $this->whatsLast();
+        if ($this->whatsLast() == '(') {
+            return false;
+        }
+        return $this->operatorList[$operator] <= $this->operatorList[$this->whatsLast()];
+    }
+
+    function printEverthingInStack() {
+        print_r($this->list);
+        echo "\n";
     }
 }

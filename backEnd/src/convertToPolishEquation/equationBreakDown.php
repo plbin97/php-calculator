@@ -10,7 +10,7 @@ function equationBreakDown($normalFormula) {
 
     $stack = [];  // Stack for storing numbers
 
-    $breakedEquation = [];  // the array that would be returned
+    $breakedFormula = [];  // the array that would be returned
 
 
     for($i = 0;$i<strlen($normalFormula);$i++) {  // Handle each character
@@ -23,10 +23,11 @@ function equationBreakDown($normalFormula) {
             // Not a number
 
             if (count($stack) == 0) {
-
                 // No number in stack, means that the character only can be parenthesis, or the previous character is the closing parenthesis
-                if ($normalFormula[$i] == '(' || $normalFormula[$i] == ')' || $breakedEquation[count($breakedEquation) - 1] == ')') {
-                    array_push($breakedEquation,$normalFormula[$i]);
+
+
+                if ($normalFormula[$i] == '(' || $normalFormula[$i] == ')' || $breakedFormula[count($breakedFormula) - 1] == ')') {
+                    array_push($breakedFormula,$normalFormula[$i]);
                 }else {
                     return null;
                 }
@@ -45,8 +46,8 @@ function equationBreakDown($normalFormula) {
                 }
 
                 // Push the number and the operator to the breakedEquation
-                array_push($breakedEquation,$numberAdd);
-                array_push($breakedEquation,$normalFormula[$i]);
+                array_push($breakedFormula,$numberAdd);
+                array_push($breakedFormula,$normalFormula[$i]);
             }
         }
     }
@@ -62,13 +63,23 @@ function equationBreakDown($normalFormula) {
         }catch (Exception $e) {
             return null;
         }
-        array_push($breakedEquation,$numberAdd);
+        array_push($breakedFormula,$numberAdd);
     }
 
     // Verify if the last character is number or closing parenthesis.
-    $last = $breakedEquation[count($breakedEquation) - 1];
+    $last = $breakedFormula[count($breakedFormula) - 1];
     if (!is_integer($last) && !($last == '(' || $last == ')')) {
         return null;
     }
-    return $breakedEquation;
+
+    for($i = 0;$i < count($breakedFormula);$i++) {
+        if ($breakedFormula[$i] == ')' && !is_integer($breakedFormula[$i - 1])){
+            return null;
+        }
+        if ($breakedFormula[$i] == '(' && !is_integer($breakedFormula[$i + 1])) {
+            return null;
+        }
+    }
+
+    return $breakedFormula;
 }

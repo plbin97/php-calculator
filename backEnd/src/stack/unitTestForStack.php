@@ -9,7 +9,8 @@ if ($test->pop() != '*') {
 if (!$test->isOperator("+")) {
     die("Error");
 }
-if ($test->isNextPopHasLowerPriorityThan("+")) {
+if (!$test->isNextPopHasHigherOrEqualPriorityThan("+")) {
     die("Error");
 }
+
 echo "Pass";
