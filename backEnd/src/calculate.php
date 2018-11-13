@@ -1,4 +1,6 @@
 <?php
+require 'stack/numberStack.php';
+require 'convertToPolishEquation/convertToPolishFormula.php';
 
 function calculate($normalFormula) {
     /**
@@ -8,17 +10,22 @@ function calculate($normalFormula) {
      * If the formula is invalid, @return null
      */
 
-    $numberStack = [];
+    $numberStack = new NumberStack();
 
-    foreach ($normalFormula as $i) {
+    $polishFormula = convertToPolishFormula($normalFormula);
+    if ($polishFormula == null) {
+        return null;
+    }
+
+
+    foreach ($polishFormula as $i) {
         if (is_integer($i)) {
-            array_push($numberStack,$i);
+            $numberStack->push($i);
         }else{
-            $number1 = array_pop($numberStack);
-            $number2 = array_pop($numberStack);
-
+            $numberStack ->calculate($i);
         }
     }
+
+    return $numberStack->popResult();
 }
 
-function simpleCalculation

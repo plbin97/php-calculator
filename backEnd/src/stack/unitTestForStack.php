@@ -1,5 +1,5 @@
 <?php
-require 'stack.php';
+require 'operatorStack.php';
 $test = new OperatorStack();
 $test->push('^');
 $test->push('*');

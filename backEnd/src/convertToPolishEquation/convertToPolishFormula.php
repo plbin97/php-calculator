@@ -1,6 +1,6 @@
 <?php
 
-require '../stack/stack.php';
+require '../stack/operatorStack.php';
 require 'equationBreakDown.php';
 
 function convertToPolishFormula($normalFormula) {
