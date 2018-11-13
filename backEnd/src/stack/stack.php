@@ -14,12 +14,15 @@ class OperatorStack
         // Put operators and priority into the array.
         // The priority start from 1(loweat) to 3(hightest)
 
-        $this->operatorList['+'] = 1;
-        $this->operatorList['-'] = 1;
-        $this->operatorList['*'] = 2;
-        $this->operatorList['/'] = 2;
-        $this->operatorList['^'] = 3;
-        $this->operatorList['&'] = 3;
+        $this->operatorList['+'] = 1;  // For addition
+        $this->operatorList['-'] = 1;  // For subtraction
+        $this->operatorList['*'] = 2;  // For multiplication
+        $this->operatorList['/'] = 2;  // For division
+        $this->operatorList['%'] = 2;  // For modulo
+        $this->operatorList['^'] = 3;  // For exponentiation
+        $this->operatorList['&'] = 3;  // For root
+
+        // Bracket is the special operators. The priority is meaningless.
         $this->operatorList['('] = 4;
         $this->operatorList[')'] = 4;
     }
@@ -27,12 +30,12 @@ class OperatorStack
     function isOperator($operator) {
         return array_key_exists($operator,$this->operatorList);
     }
-    function push($data) {
+    function push($operator) {
         /**
          * Push into stack
-         * @param $data Element that would be push in.
+         * @param $operator Element that would be push in.
          */
-        array_push($this->list,$data);
+        array_push($this->list,$operator);
     }
     function pop() {
         /**
@@ -51,7 +54,7 @@ class OperatorStack
          */
         return count($this->list) == 0;
     }
-    function popTest() {
+    function whatsLast() {
         /**
          * Get the last element, but not pop out.
          * @return last element; if the stack is empty, it would return null
@@ -62,19 +65,19 @@ class OperatorStack
             return null;
         }
     }
-    function isNextPopHasLowerPriorityThan($element) {
+    function isNextPopHasLowerPriorityThan($operator) {
         /**
          * as function name said
-         * @param $element Operator
+         * @param $operator Operator
          * @return true if yes, return false is not.
          * ALso, return false if the parameter is not a operator or empty
          */
-        if ($this->isOperator($element)) {
+        if ($this->isOperator($operator)) {
             return false;
         }
         if ($this->isEmpty()) {
             return false;
         }
-        return $this->operatorList[$element] > $this->popTest();
+        return $this->operatorList[$operator] > $this->whatsLast();
     }
 }
