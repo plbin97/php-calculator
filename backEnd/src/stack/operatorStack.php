@@ -26,7 +26,6 @@ class OperatorStack
         $this->operatorList['('] = 5;
         $this->operatorList[')'] = 5;
 
-        print_r($this->operatorList);
     }
 
     function isOperator($operator) {

@@ -1,7 +1,7 @@
 <?php
 
-require '../stack/operatorStack.php';
-require 'equationBreakDown.php';
+include dirname(__FILE__) . '/../stack/operatorStack.php';
+include 'equationBreakDown.php';
 
 function convertToPolishFormula($normalFormula) {
     /**

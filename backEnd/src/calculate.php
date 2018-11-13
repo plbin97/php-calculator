@@ -1,6 +1,6 @@
 <?php
-require 'stack/numberStack.php';
-require 'convertToPolishEquation/convertToPolishFormula.php';
+include 'stack/numberStack.php';
+include 'convertToPolishEquation/convertToPolishFormula.php';
 
 function calculate($normalFormula) {
     /**
@@ -13,12 +13,17 @@ function calculate($normalFormula) {
     $numberStack = new NumberStack();
 
     $polishFormula = convertToPolishFormula($normalFormula);
+
+    // If the normalFormula has no error
     if ($polishFormula == null) {
         return null;
     }
 
 
+    // Loop for each elements
     foreach ($polishFormula as $i) {
+
+        // if number then push; if oeprator than calculate
         if (is_integer($i)) {
             $numberStack->push($i);
         }else{
@@ -26,6 +31,7 @@ function calculate($normalFormula) {
         }
     }
 
+    // get the final result.
     return $numberStack->popResult();
 }
 
