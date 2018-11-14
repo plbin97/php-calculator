@@ -20,11 +20,11 @@ class OperatorStack
         $this->operatorList['/'] = 2;  // For division
         $this->operatorList['%'] = 3;  // For modulo
         $this->operatorList['^'] = 4;  // For exponentiation
-        $this->operatorList['&'] = 4;  // For root
+        $this->operatorList['&'] = 5;  // For root
 
         // Bracket is the special operators. The priority is meaningless.
-        $this->operatorList['('] = 5;
-        $this->operatorList[')'] = 5;
+        $this->operatorList['('] = 6;
+        $this->operatorList[')'] = 6;
 
     }
 

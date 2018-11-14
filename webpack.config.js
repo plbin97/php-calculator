@@ -5,16 +5,15 @@ module.exports = {
 
     output: {  // compiled file in ./dist
         path: path.resolve(__dirname, 'dist'),
-        filename: 'zcapt.js'
+        filename: 'calculator.js'
     },
     module: {
         rules: [
             { // model for sass
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: [
                     "style-loader",
                     "css-loader",
-                    "sass-loader"
                 ]
             },
             {

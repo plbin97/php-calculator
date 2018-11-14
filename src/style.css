@@ -1,0 +1,40 @@
+.frame {
+    position: absolute;
+    display: block;
+    height: 650px;
+    width: 300px;
+}
+.display {
+    position: relative;
+    height: 100px;
+    padding-top: 100px;
+    background-color: #F7FEFF;
+    width: auto;
+    outline: none;
+    text-align: end;
+    font-size: 30px;
+}
+.numberPad {
+    position: relative;
+    height: 375px;
+    width: auto;
+}
+.button {
+    border: 1px solid #F9F9F9;
+    float: left;
+    height: 73px;
+    width: 73px;
+    font-size: 23px;
+    line-height: 75px;
+    text-align: center;
+    background-color: white;
+    user-select: none;
+}
+.equal {
+    height: 74px;
+    width: auto;
+    line-height: 75px;
+    text-align: center;
+    user-select: none;
+    background-color: #6CD5FF;
+}
