@@ -24,7 +24,7 @@ function calculate($normalFormula) {
     foreach ($polishFormula as $i) {
 
         // if number then push; if oeprator than calculate
-        if (is_integer($i)) {
+        if (is_numeric($i)) {
             $numberStack->push($i);
         }else{
             $numberStack ->calculate($i);

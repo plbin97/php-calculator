@@ -21,7 +21,7 @@ function convertToPolishFormula($normalFormula) {
 
     foreach ($normalFormulaArray as $i) {  // Loop through all the element in normalFormula
 
-        if (is_integer($i)) {
+        if (is_numeric($i)) {
             // If the element is number, then push to polish formula
             array_push($polishFormula,$i);
 
@@ -64,6 +64,7 @@ function convertToPolishFormula($normalFormula) {
             }
         }
     }
+
     while (!$operatorStack->isEmpty()) {
         // Pop out the rest of operators in stack
         array_push($polishFormula,$operatorStack->pop());

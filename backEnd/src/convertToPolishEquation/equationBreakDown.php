@@ -12,12 +12,22 @@ function equationBreakDown($normalFormula) {
 
     $breakedFormula = [];  // the array that would be returned
 
+    $stackForparenthesis = [];  // For parenthesis test
+
 
     for($i = 0;$i<strlen($normalFormula);$i++) {  // Handle each character
 
 
-        if (is_numeric($normalFormula[$i])) {
-            array_push($stack,$normalFormula[$i]);  // Do this if this character is number
+        // For parenthesis test
+        if($normalFormula[$i] == '(') {
+            array_push($stackForparenthesis,1);
+        }
+        if ($normalFormula[$i] == ')') {
+            array_pop($stackForparenthesis);
+        }
+
+        if (is_numeric($normalFormula[$i]) || $normalFormula[$i] == '.') {
+            array_push($stack,$normalFormula[$i]);  // Do this if this character is number or .
         }else{
 
             // Not a number
@@ -40,7 +50,7 @@ function equationBreakDown($normalFormula) {
                     $temp = array_pop($stack) . $temp;
                 }
                 try {
-                    $numberAdd = (int)$temp;
+                    $numberAdd = (double)$temp;
                 }catch (Exception $e) {
                     return null;
                 }
@@ -59,7 +69,7 @@ function equationBreakDown($normalFormula) {
             $temp = array_pop($stack) . $temp;
         }
         try {
-            $numberAdd = (int)$temp;
+            $numberAdd = (double)$temp;
         }catch (Exception $e) {
             return null;
         }
@@ -68,17 +78,22 @@ function equationBreakDown($normalFormula) {
 
     // Verify if the last character is number or closing parenthesis.
     $last = $breakedFormula[count($breakedFormula) - 1];
-    if (!is_integer($last) && !($last == '(' || $last == ')')) {
+    if (!is_numeric($last) && !($last == '(' || $last == ')')) {
         return null;
     }
 
     for($i = 0;$i < count($breakedFormula);$i++) {
-        if ($breakedFormula[$i] == ')' && !is_integer($breakedFormula[$i - 1])){
+        if ($breakedFormula[$i] == ')' && !is_numeric($breakedFormula[$i - 1])){
             return null;
         }
-        if ($breakedFormula[$i] == '(' && !is_integer($breakedFormula[$i + 1])) {
+        if ($breakedFormula[$i] == '(' && !is_numeric($breakedFormula[$i + 1])) {
             return null;
         }
+    }
+
+    // For parenthesis test
+    if (count($stackForparenthesis) != 0) {
+        return null;
     }
 
     return $breakedFormula;
