@@ -31,9 +31,9 @@ function equationBreakDown($normalFormula) {
 
         }else if( $normalFormula[$i] == '-') {
             if (isset($normalFormula[$i - 1])) {
-                if ((!is_numeric($normalFormula[$i - 1])) && $normalFormula[$i] == '-') {
-                    array_push($stack, $normalFormula[$i]);  // if it is a negative number
-                }
+                array_push($stack, $normalFormula[$i]);  // if it is a negative number
+            }else if ((!is_numeric($normalFormula[$i - 1])) && $normalFormula[$i] == '-') {
+                array_push($stack, $normalFormula[$i]);  // if it is a negative number
             }
         }else{
 
