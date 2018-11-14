@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/plbin97/php-calculator/issues"
   },
-  "homepage": "https://github.com/plbin97/php-calculator#readme"
+  "homepage": "https://github.com/plbin97/php-calculator#readme",
+  "devDependencies": {
+    "webpack": "^4.25.1"
+  }
 }

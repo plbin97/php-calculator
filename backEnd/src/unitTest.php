@@ -1,3 +1,3 @@
 <?php
 include 'calculate.php';
-echo calculate("0+1");
+echo calculate("0-0");
