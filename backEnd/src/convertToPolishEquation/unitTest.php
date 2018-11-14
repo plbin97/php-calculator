@@ -1,9 +1,9 @@
 <?php
 include 'convertToPolishFormula.php';
-//print_r(equationBreakDown("12+34*23.4+(4*77+2)*123"));
+print_r(equationBreakDown("0+1"));
 
-$arr = convertToPolishFormula("12+3.4*23.4+(4*77+2)*1.23^3");
-foreach ($arr as $i) {
-    echo $i . ' ';
-}
+//$arr = convertToPolishFormula("0+1");
+//foreach ($arr as $i) {
+//    echo $i . ' ';
+//}
 

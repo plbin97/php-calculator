@@ -85,6 +85,9 @@ function equationBreakDown($normalFormula) {
     }
 
     for($i = 0;$i < count($breakedFormula);$i++) {
+        if (!isset($breakedFormula[$i - 1]) || !isset($breakedFormula[$i + 1])) {
+            continue;
+        }
         if ($breakedFormula[$i] == ')' && !is_numeric($breakedFormula[$i - 1])){
             return null;
         }
