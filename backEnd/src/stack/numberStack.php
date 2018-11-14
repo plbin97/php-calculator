@@ -49,7 +49,7 @@ class NumberStack
                 break;
 
             case '^':
-                array_push($this->stack,$number1 ^ $number2);
+                array_push($this->stack,pow($number1,$number2));
                 break;
 
             case '&':
