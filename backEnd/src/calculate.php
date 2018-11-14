@@ -27,7 +27,9 @@ function calculate($normalFormula) {
         if (is_numeric($i)) {
             $numberStack->push($i);
         }else{
-            $numberStack ->calculate($i);
+            if(!$numberStack ->calculate($i)) {
+                return null;
+            }
         }
     }
 

@@ -19,6 +19,7 @@ class NumberStack
         /**
          * Make calculation for the first two numbers pop from the stack; calculate them by operator, and push back.
          * @param $operator the operator for calculation
+         * @return true if success, return false if error
          */
 
         // First two numbers
@@ -41,6 +42,9 @@ class NumberStack
                 break;
 
             case '/':
+                if ($number2 == 0) {  //
+                    return false;
+                }
                 array_push($this->stack,$number1 / $number2);
                 break;
 
@@ -53,10 +57,14 @@ class NumberStack
                 break;
 
             case '&':
+                if ($number2 < 0) {
+                    return false;
+                }
                 array_push($this->stack, sqrt($number2));
                 break;
 
         }
+        return true;
     }
     function popResult() {
         /**
