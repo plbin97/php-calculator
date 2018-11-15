@@ -29,7 +29,17 @@ exports.build = ()=> {
     equal.className = "equal";
     equal.innerText = "=";
     equal.onclick = () => {
-        require('./makeCalculation').calculate(display.innerText);
+        require('./makeCalculation').calculate(display.innerText,(result)=> {
+            if (result) {
+                display.innerHTML = result;
+                let selection = window.getSelection();
+                for(let position = 0; position !== result.length; position++) {
+                    selection.modify("move", "right", "character");
+                }
+            } else {
+                console.log("time out");
+            }
+        });
     };
     frame.appendChild(equal);
 

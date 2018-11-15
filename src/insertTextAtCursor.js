@@ -9,8 +9,8 @@ exports.insert = (text) =>{
     let node = document.createTextNode(text);
     range.insertNode(node);
 
-    for(let position = 0; position != text.length; position++)
+    for(let position = 0; position !== text.length; position++)
     {
         selection.modify("move", "right", "character");
     }
-}
+};

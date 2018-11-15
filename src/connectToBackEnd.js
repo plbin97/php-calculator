@@ -1,27 +1,21 @@
-exports.post = (formula) => {
+exports.post = (formula,callback) => {
     let req = new XMLHttpRequest();
-    req.open("POST","backEnd",true);
-    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    req.send("formula");
-    req.addEventListener("load",() => {
-        if (req.status !== 200) {
-            callback(null);
-        }else {
-            let response = null;
-            try {
-                response = JSON.parse(req.responseText)
-            }catch (e) {
-                callback(null);
+    req.open("POST","backEnd/index.php",true);
+    req.send(formula);
+    req.onload = () => {
+        if (req.status === 200) {
+            if (req.responseText === "Error")  {
+                callback(false);
+            }else{
+                callback(req.responseText);
             }
-            if (response.status === undefined) {
-                callback(null);
-            }else if (response.status != 0) {
-                callback(null);
-            }else {
-                // Normal
-                callback(response.authID);
-            }
+        }else{
+            callback(false);
         }
-    });
-};
+    };
+
+    req.timeout = 5000;
+    req.ontimeout = () => {
+        callback(false);
+    }
 };

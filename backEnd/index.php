@@ -1,12 +1,9 @@
 <?php
 include 'src/calculate.php';
-
-if (!isset($_POST['formula'])) {
-    die("Error");
-}else if ($_POST['formula'] == ''){
+if (file_get_contents('php://input') == ''){
     die("Error");
 }else{
-    $result = calculate($_POST['formula']);
+    $result = calculate(file_get_contents('php://input'));
     if($result === null) {
         die("Error");
     }else{
