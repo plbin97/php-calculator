@@ -29,12 +29,6 @@ function equationBreakDown($normalFormula) {
         if (is_numeric($normalFormula[$i]) || $normalFormula[$i] == '.') {
             array_push($stack, $normalFormula[$i]);  // Do this if this character is number or .
 
-        }else if( $normalFormula[$i] == '-') {
-            if (isset($normalFormula[$i - 1])) {
-                array_push($stack, $normalFormula[$i]);  // if it is a negative number
-            }else if ((!is_numeric($normalFormula[$i - 1])) && $normalFormula[$i] == '-') {
-                array_push($stack, $normalFormula[$i]);  // if it is a negative number
-            }
         }else{
 
             // Not a number
